@@ -1,1 +1,0 @@
-# jobmatix-pixel
