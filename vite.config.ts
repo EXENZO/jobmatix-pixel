@@ -1,14 +1,14 @@
 import { defineConfig } from 'vite'
+import { resolve } from 'path'
 
 export default defineConfig({
   build: {
-    sourcemap: false,
-    outDir: './public/tracking',
-    rollupOptions: {
-      input: './main.js',
-      output: {
-        entryFileNames: 'jobmatix.js',
-      },
+    lib: {
+      // Could also be a dictionary or array of multiple entry points
+      entry: resolve(__dirname, './main.js'),
+      name: 'jobmatix-pixel',
+      // the proper extensions will be added
+      fileName: 'jobmatix-pixel',
     },
   },
 })
