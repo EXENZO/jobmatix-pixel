@@ -12,9 +12,11 @@ export function getAppId() {
   return widgetScript?.getAttribute('id')
 }
 
-const sourceLink = '/tracking/jobmatix.js'
+const sourceLink = './dist/jobmatix-pixel.js'
 const collectorUrl = 'https://pixel.jobmatix.app'
 const appId = getAppId()
+
+console.log('appId', appId)
 
 if (!appId) {
   throw new Error('App ID not found')

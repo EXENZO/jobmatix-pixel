@@ -11,9 +11,10 @@
         x = j.createElement(b)
         x.id = t
         x.src = a
-        x.async = m
+        x.type = m
+        x.async = 1
         i.appendChild(x)
-      })(document, 'body', 'script', 1, '/tracking/jobmatix.js', '[replace-appId]')
+      })(document, 'body', 'script', 'module', './dist/jobmatix-pixel.js', '[replace-appId]')
     </script>
   </body>
 </html>
