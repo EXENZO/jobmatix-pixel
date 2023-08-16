@@ -1,6 +1,5 @@
 {
-  "name": "jobmatix-tracking",
-  "private": true,
+  "name": "@jobmatix/jobmatix-pixel",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -14,5 +13,21 @@
   "dependencies": {
     "@snowplow/browser-plugin-link-click-tracking": "^3.13.1",
     "@snowplow/browser-tracker": "^3.13.1"
-  }
+  },
+  "description": "",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EXENZO/jobmatix-pixel.git"
+  },
+  "keywords": [
+    "jobmatix",
+    "pixel"
+  ],
+  "author": "jobmatix",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EXENZO/jobmatix-pixel/issues"
+  },
+  "homepage": "https://github.com/EXENZO/jobmatix-pixel#readme"
 }
