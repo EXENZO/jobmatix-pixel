@@ -1,6 +1,6 @@
 {
-  "name": "@jobmatix/jobmatix-pixel",
-  "version": "0.0.0",
+  "name": "jobmatix-pixel",
+  "version": "0.1.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -19,9 +19,11 @@
     "url": "EXENZO/jobmatix-pixel"
   },
   "type": "module",
-  "files": ["dist"],
-  "main": "./dist/jobmatix-pixel.umd.cjs",
-  "module": "./dist/jobmatix-pixel.js",
+  "files": [
+    "tracker"
+  ],
+  "main": "./tracker/script.umd.cjs",
+  "module": "./tracker/script.js",
   "keywords": [
     "jobmatix",
     "pixel"

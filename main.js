@@ -12,11 +12,9 @@ export function getAppId() {
   return widgetScript?.getAttribute('id')
 }
 
-const sourceLink = './dist/jobmatix-pixel.js'
+const sourceLink = 'https://unpkg.com/jobmatix-pixel/tracker/script.js'
 const collectorUrl = 'https://pixel.jobmatix.app'
 const appId = getAppId()
-
-console.log('appId', appId)
 
 if (!appId) {
   throw new Error('App ID not found')
@@ -40,7 +38,7 @@ enableLinkClickTracking()
 setReferrerUrl(document.referrer)
 trackPageView()
 
-const jobmatixTrackSelfDescribingEvent = (data) => trackSelfDescribingEvent({
+window.jobmatixTrack = (data) => trackSelfDescribingEvent({
   event: {
     schema: 'iglu:com.jobmatix/conversion/jsonschema/1-0-0',
     data: {
