@@ -12,7 +12,7 @@ export function getAppId() {
   return widgetScript?.getAttribute('id')
 }
 
-const sourceLink = 'https://unpkg.com/jobmatix-pixel/tracker/script.js'
+const sourceLink = 'https://unpkg.com/@jobmatix.com/pixel/script.min.js'
 const collectorUrl = 'https://pixel.jobmatix.app'
 const appId = getAppId()
 

@@ -14,7 +14,18 @@
         x.type = m
         x.async = 1
         i.appendChild(x)
-      })(document, 'body', 'script', 'module', 'https://unpkg.com/jobmatix-pixel/tracker/script.js', '[replace-appId]')
+      })(document, 'body', 'script', 'text/javascript', 'https://unpkg.com/@jobmatix.com/pixel/script.min.js', '[replace-appId]')
+
+      window.jobmatixTrack({
+        conversion_type: 'applicant',
+        actor_reference: null,
+        job_reference: null,
+        job_title: null
+      })
+
+      // npm run build
+      // uglifyjs --compress --mangle --output script.min.js -- script.umd.cjs
+      // for minification
     </script>
   </body>
 </html>
