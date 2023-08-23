@@ -7,6 +7,14 @@ import {
 } from '@snowplow/browser-tracker'
 import { LinkClickTrackingPlugin, enableLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
 
+const trackFunctions = {
+  enableActivityTracking,
+  setReferrerUrl,
+  trackPageView,
+  trackSelfDescribingEvent,
+  enableLinkClickTracking,
+}
+
 export function getAppId() {
   const widgetScript = document.querySelector(`script[src="${sourceLink}"]`)
   return widgetScript?.getAttribute('id')
@@ -33,17 +41,18 @@ newTracker('sp', collectorUrl, {
   },
 })
 
-enableActivityTracking({ minimumVisitLength: 10, heartbeatDelay: 10 })
-enableLinkClickTracking()
-setReferrerUrl(document.referrer)
-trackPageView()
+const q = window.jobmatix.q || []
 
-window.jobmatixTrack = (data) => trackSelfDescribingEvent({
-  event: {
-    schema: 'iglu:com.jobmatix/conversion/jsonschema/1-0-0',
-    data: {
-      conversion_type: 'applicant',
-      ...data
-    }
+window.jobmatix = (...args) => {
+  const [ functionName, ...rest ] = args
+  const trackFunction = trackFunctions[functionName]
+  if (trackFunction) {
+    trackFunction(...rest)
+  } else {
+    console.error(`Function ${functionName} not found`)
   }
+}
+
+q.forEach((args) => {
+  window.jobmatix(...args)
 })

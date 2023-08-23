@@ -1,31 +1,19 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    <script>
-      ((j, o, b, m, a, t, i, x) => {
-        i = j.getElementsByTagName(o)[0]
-        x = j.createElement(b)
-        x.id = t
-        x.src = a
-        x.type = m
-        x.async = 1
-        i.appendChild(x)
-      })(document, 'body', 'script', 'text/javascript', 'https://unpkg.com/@jobmatix.com/pixel/script.min.js', '[replace-appId]')
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+<script type="text/javascript" async>
+  ((j,o,b,m,a,t,i,x)=>{j[m]||(j[m]=function(){(j[m].q=j[m].q||[]).push(arguments)},
+          j[m].q=j[m].q||[],i=o.getElementsByTagName(b)[0],x=o.createElement(b),
+          x.id=t,x.src=a,x.async=1,i.parentNode.insertBefore(x,i))
+  })(window,document,'script','jobmatix','https://unpkg.com/@jobmatix.com/pixel/script.min.js','[replace-appId]')
 
-      window.jobmatixTrack({
-        conversion_type: 'applicant',
-        actor_reference: null,
-        job_reference: null,
-        job_title: null
-      })
-
-      // npm run build
-      // uglifyjs --compress --mangle --output script.min.js -- script.umd.cjs
-      // for minification
-    </script>
-  </body>
+  // npm run build
+  // uglifyjs --compress --mangle --output script.min.js -- script.umd.cjs
+  // for minification
+</script>
+</body>
 </html>
