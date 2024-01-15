@@ -1,6 +1,6 @@
 {
   "name": "@jobmatix.com/pixel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "dev": "vite",
     "build": "vite build && uglifyjs --compress --mangle --output script.min.js -- script.umd.cjs && rm -rf script.umd.cjs && cp script.min.js jm.min.js",
