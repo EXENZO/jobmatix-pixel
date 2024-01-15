@@ -7,33 +7,56 @@ import {
 } from '@snowplow/browser-tracker'
 import { LinkClickTrackingPlugin, enableLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
 
+const appParams = window.jobmatix.p || {}
+const functionsQueue = window.jobmatix.q || []
+const collectorUrl = 'https://pixel.jobmatix.app'
+const sourceLinks = ['https://unpkg.com/@jobmatix.com/pixel/script.min.js', 'https://unpkg.com/@jobmatix.com/pixel/jm.min.js', './script.min.js']
+
+const acceptedEnvs = ['production', 'local', 'development', 'demo', 'uat']
+const acceptedConversionTypes = ['applicant', 'apply_start', 'job_alert', 'resume', 'register']
+const conversionKeys = {
+  type: 'conversion_type',
+}
+
 const trackFunctions = {
   enableActivityTracking,
   setReferrerUrl,
   trackPageView,
   trackSelfDescribingEvent,
   enableLinkClickTracking,
-}
+  conversion: jobmatixConversion,
+};
 
-export function getAppId() {
-  const widgetScript = document.querySelector(`script[src="${sourceLink}"]`)
-  return widgetScript?.getAttribute('id')
-}
+// Get pixel id
+(() => {
+  if (appParams?.pixel_id) {
+    return
+  }
+  const scripts = sourceLinks.map((src) => document.querySelector(`script[src="${src}"]`)).filter(el => el)
+  appParams.pixel_id = scripts?.[0]?.getAttribute('id') || ''
+})();
 
-const sourceLink = 'https://unpkg.com/@jobmatix.com/pixel/script.min.js'
-const collectorUrl = 'https://pixel.jobmatix.app'
-const appId = getAppId()
+// Validate params
+(() => {
+  if (!appParams?.environment) {
+    appParams.environment = 'production'
+  }
 
-if (!appId) {
-  throw new Error('App ID not found')
-}
+  if (!appParams?.pixel_id) {
+    throw new Error('Pixel ID not found')
+  }
 
-newTracker('sp', collectorUrl, {
-  appId,
+  if (!acceptedEnvs.includes(appParams?.environment)) {
+    throw new Error('Environment not accepted')
+  }
+})();
+
+newTracker('jm', collectorUrl, {
+  ['jobmatix-platform-pixel']: appParams.pixel_id,
   plugins: [ LinkClickTrackingPlugin() ],
   eventMethod: 'post',
   platform: 'web',
-  cookieName: '_sp_',
+  cookieName: '_jm_',
   cookieSameSite: 'Lax',
   contexts: {
     webPage: !0,
@@ -41,18 +64,52 @@ newTracker('sp', collectorUrl, {
   },
 })
 
-const q = window.jobmatix.q || []
-
 window.jobmatix = (...args) => {
   const [ functionName, ...rest ] = args
-  const trackFunction = trackFunctions[functionName]
-  if (trackFunction) {
+  try {
+    const trackFunction = trackFunctions[functionName]
     trackFunction(...rest)
-  } else {
+  } catch(e) {
     console.error(`Function ${functionName} not found`)
   }
 }
 
-q.forEach((args) => {
-  window.jobmatix(...args)
+functionsQueue.forEach((args) => {
+  jobmatix(...args)
 })
+
+jobmatix('enableActivityTracking', { minimumVisitLength: 10, heartbeatDelay: 10 })
+jobmatix('enableLinkClickTracking')
+jobmatix('setReferrerUrl', document.referrer)
+jobmatix('trackPageView', {
+  context: [{
+    schema: 'iglu:com.jobmatix/jobmatix_platform_pixel/jsonschema/1-0-0',
+    params: appParams,
+  }],
+})
+
+function jobmatixConversion(params) {
+  try {
+    if (!params?.type) {
+      throw new Error('Conversion type not found')
+    }
+    if (!acceptedConversionTypes.includes(params.type)) {
+      throw new Error('Conversion type not accepted')
+    }
+    const data = {}
+    Object.keys(params).forEach((key) => {
+      const dataKey = conversionKeys[key] || key
+      if (params[key]) {
+        data[dataKey] = String(params[key])
+      }
+    })
+    trackSelfDescribingEvent({
+      event: {
+        schema: 'iglu:com.jobmatix/conversion/jsonschema/1-0-0',
+        data,
+      },
+    })
+  } catch(error) {
+    console.error(error)
+  }
+}

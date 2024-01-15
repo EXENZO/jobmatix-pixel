@@ -3,7 +3,7 @@
   "version": "0.0.5",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && uglifyjs --compress --mangle --output script.min.js -- script.umd.cjs && rm -rf script.umd.cjs && cp script.min.js jm.min.js",
     "preview": "vite preview"
   },
   "devDependencies": {

@@ -1,19 +1,33 @@
 <!doctype html>
 <html lang="en">
-<head>
+<head title="jobmatix-pixel">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
 <script type="text/javascript" async>
-  ((j,o,b,m,a,t,i,x)=>{j[m]||(j[m]=function(){(j[m].q=j[m].q||[]).push(arguments)},
-          j[m].q=j[m].q||[],i=o.getElementsByTagName(b)[0],x=o.createElement(b),
-          x.id=t,x.src=a,x.async=1,i.parentNode.insertBefore(x,i))
-  })(window,document,'script','jobmatix','https://unpkg.com/@jobmatix.com/pixel/script.min.js','[replace-appId]')
+  //Variant 1
+  // ((j,o,b,m,a,t,i,x)=>{j[m]||(j[m]=function(){(j[m].q=j[m].q||[]).push(arguments)},
+  //         j[m].q=j[m].q||[],i=o.getElementsByTagName(b)[0],x=o.createElement(b),
+  //         x.id=t,x.src=a,x.async=1,i.parentNode.insertBefore(x,i))
+  // })(window,document,'script','jobmatix','./script.min.js','[replace-appId]');
+
+  // Variant 2:
+  ((j, o, b, m, a, t, i, x) => {
+    j[m] || (j[m] = function() {(j[m].q = j[m].q || []).push(arguments)},
+            j[m].q = j[m].q || [], i = o.getElementsByTagName(b)[0], x = o.createElement(b),
+            j[m].p = t, x.src = a, x.async = 1, i.parentNode.insertBefore(x, i))
+  })(window, document, 'script', 'jobmatix', './script.min.js', {
+    pixel_id: '1234567890',
+    domain_name: 'https://jobmatix.io',
+    environment: 'uat',
+  })
 
   // npm run build
+  // for minification:
   // uglifyjs --compress --mangle --output script.min.js -- script.umd.cjs
-  // for minification
+  // for copying:
+  // cp script.min.js jm.min.js
 </script>
 </body>
 </html>
