@@ -13,8 +13,8 @@ const trackFunctions = {
   trackPageView,
   trackSelfDescribingEvent,
   enableLinkClickTracking,
-}
-;
+};
+
 const appParams = window.jobmatix.p || {}
 const functionsQueue = window.jobmatix.q || []
 const collectorUrl = 'https://pixel.jobmatix.app'
@@ -27,10 +27,7 @@ const sourceLinks = ['https://unpkg.com/@jobmatix.com/pixel/script.min.js', 'htt
     return
   }
   const scripts = sourceLinks.map((src) => document.querySelector(`script[src="${src}"]`)).filter(el => el)
-  const id = scripts[0]?.getAttribute('id')
-  if (id) {
-    appParams.pixel_id = id
-  }
+  appParams.pixel_id = scripts?.[0]?.getAttribute('id') || ''
 })();
 
 // Validate params
@@ -63,10 +60,10 @@ newTracker('jm', collectorUrl, {
 
 window.jobmatix = (...args) => {
   const [ functionName, ...rest ] = args
-  const trackFunction = trackFunctions[functionName]
-  if (trackFunction) {
+  try {
+    const trackFunction = trackFunctions[functionName]
     trackFunction(...rest)
-  } else {
+  } catch(e) {
     console.error(`Function ${functionName} not found`)
   }
 }
@@ -81,6 +78,37 @@ jobmatix('setReferrerUrl', document.referrer)
 jobmatix('trackPageView', {
   context: [{
     schema: 'iglu:com.jobmatix/jobmatix_platform_pixel/jsonschema/1-0-0',
-    data: appParams,
+    params: appParams,
   }],
 })
+
+const acceptedConversionTypes = ['applicant', 'apply_start', 'job_alert', 'resume', 'register']
+const conversionKeys = {
+  type: 'conversion_type',
+}
+
+window.jobmatix.conversion = (params) => {
+  try {
+    if (!params?.type) {
+      throw new Error('Conversion type not found')
+    }
+    if (!acceptedConversionTypes.includes(params.type)) {
+      throw new Error('Conversion type not accepted')
+    }
+    const data = {}
+    Object.keys(params).forEach((key) => {
+      const dataKey = conversionKeys[key] || key
+      if (params[key]) {
+        data[dataKey] = String(params[key])
+      }
+    })
+    jobmatix('trackSelfDescribingEvent', {
+      event: {
+        schema: 'iglu:com.jobmatix/conversion/jsonschema/1-0-0',
+        data,
+      },
+    })
+  } catch(error) {
+    console.error(error)
+  }
+}
