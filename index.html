@@ -23,6 +23,10 @@
     environment: 'uat',
   })
 
+  jobmatix('enableActivityTracking', { minimumVisitLength: 10, heartbeatDelay: 10 })
+  jobmatix('enableLinkClickTracking')
+  jobmatix('setReferrerUrl', document.referrer)
+
   // npm run build
   // for minification:
   // uglifyjs --compress --mangle --output script.min.js -- script.umd.cjs

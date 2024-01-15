@@ -64,8 +64,7 @@ newTracker('jm', collectorUrl, {
   },
 })
 
-window.jobmatix = (...args) => {
-  const [ functionName, ...rest ] = args
+window.jobmatix = (functionName, ...rest) => {
   try {
     const trackFunction = trackFunctions[functionName]
     trackFunction(...rest)
@@ -78,10 +77,17 @@ functionsQueue.forEach((args) => {
   jobmatix(...args)
 })
 
-jobmatix('enableActivityTracking', { minimumVisitLength: 10, heartbeatDelay: 10 })
-jobmatix('enableLinkClickTracking')
-jobmatix('setReferrerUrl', document.referrer)
-jobmatix('trackPageView', {
+function runDefaultAction(...as) {
+  const inQueue = functionsQueue.some((args) => args[0] === as[0])
+  if (!inQueue) {
+    jobmatix(...as)
+  }
+}
+
+runDefaultAction('enableActivityTracking', { minimumVisitLength: 10, heartbeatDelay: 10 })
+runDefaultAction('enableLinkClickTracking')
+runDefaultAction('setReferrerUrl', document.referrer)
+runDefaultAction('trackPageView', {
   context: [{
     schema: 'iglu:com.jobmatix/jobmatix_platform_pixel/jsonschema/1-0-0',
     params: appParams,
