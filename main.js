@@ -14,34 +14,52 @@ const trackFunctions = {
   trackSelfDescribingEvent,
   enableLinkClickTracking,
 }
-
-export function getAppId() {
-  const widgetScript = document.querySelector(`script[src="${sourceLink}"]`)
-  return widgetScript?.getAttribute('id')
-}
-
-const sourceLink = 'https://unpkg.com/@jobmatix.com/pixel/script.min.js'
+;
+const appParams = window.jobmatix.p || {}
+const functionsQueue = window.jobmatix.q || []
 const collectorUrl = 'https://pixel.jobmatix.app'
-const appId = getAppId()
+const acceptedEnvs = ['production', 'local', 'development', 'demo', 'uat']
+const sourceLinks = ['https://unpkg.com/@jobmatix.com/pixel/script.min.js', 'https://unpkg.com/@jobmatix.com/pixel/jm.min.js', './script.min.js'];
 
-if (!appId) {
-  throw new Error('App ID not found')
-}
+// Get pixel id
+(() => {
+  if (appParams?.pixel_id) {
+    return
+  }
+  const scripts = sourceLinks.map((src) => document.querySelector(`script[src="${src}"]`)).filter(el => el)
+  const id = scripts[0]?.getAttribute('id')
+  if (id) {
+    appParams.pixel_id = id
+  }
+})();
 
-newTracker('sp', collectorUrl, {
-  appId,
+// Validate params
+(() => {
+  if (!appParams?.environment) {
+    appParams.environment = 'production'
+  }
+
+  if (!appParams?.pixel_id) {
+    throw new Error('Pixel ID not found')
+  }
+
+  if (!acceptedEnvs.includes(appParams?.environment)) {
+    throw new Error('Environment not accepted')
+  }
+})();
+
+newTracker('jm', collectorUrl, {
+  ['jobmatix-platform-pixel']: appParams.pixel_id,
   plugins: [ LinkClickTrackingPlugin() ],
   eventMethod: 'post',
   platform: 'web',
-  cookieName: '_sp_',
+  cookieName: '_jm_',
   cookieSameSite: 'Lax',
   contexts: {
     webPage: !0,
     performanceTiming: !0,
   },
 })
-
-const q = window.jobmatix.q || []
 
 window.jobmatix = (...args) => {
   const [ functionName, ...rest ] = args
@@ -53,6 +71,16 @@ window.jobmatix = (...args) => {
   }
 }
 
-q.forEach((args) => {
+functionsQueue.forEach((args) => {
   window.jobmatix(...args)
+})
+
+jobmatix('enableActivityTracking', { minimumVisitLength: 10, heartbeatDelay: 10 })
+jobmatix('enableLinkClickTracking')
+jobmatix('setReferrerUrl', document.referrer)
+jobmatix('trackPageView', {
+  context: [{
+    schema: 'iglu:com.jobmatix/jobmatix_platform_pixel/jsonschema/1-0-0',
+    data: appParams,
+  }],
 })
