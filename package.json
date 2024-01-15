@@ -1,17 +1,17 @@
 {
   "name": "@jobmatix.com/pixel",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build && uglifyjs --compress --mangle --output script.min.js -- script.umd.cjs && rm -rf script.umd.cjs && cp script.min.js jm.min.js",
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^4.4.5"
+    "vite": "^5.0.11"
   },
   "dependencies": {
-    "@snowplow/browser-plugin-link-click-tracking": "^3.13.1",
-    "@snowplow/browser-tracker": "^3.13.1"
+    "@snowplow/browser-plugin-link-click-tracking": "^3.19.0",
+    "@snowplow/browser-tracker": "^3.19.0"
   },
   "description": "",
   "repository": {
@@ -20,7 +20,8 @@
   },
   "type": "module",
   "files": [
-    "script.min.js"
+    "script.min.js",
+    "jm.min.js"
   ],
   "main": "script.min.js",
   "module": "./script.min.js",
