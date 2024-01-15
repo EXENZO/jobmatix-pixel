@@ -7,19 +7,25 @@ import {
 } from '@snowplow/browser-tracker'
 import { LinkClickTrackingPlugin, enableLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
 
+const appParams = window.jobmatix.p || {}
+const functionsQueue = window.jobmatix.q || []
+const collectorUrl = 'https://pixel.jobmatix.app'
+const sourceLinks = ['https://unpkg.com/@jobmatix.com/pixel/script.min.js', 'https://unpkg.com/@jobmatix.com/pixel/jm.min.js', './script.min.js']
+
+const acceptedEnvs = ['production', 'local', 'development', 'demo', 'uat']
+const acceptedConversionTypes = ['applicant', 'apply_start', 'job_alert', 'resume', 'register']
+const conversionKeys = {
+  type: 'conversion_type',
+}
+
 const trackFunctions = {
   enableActivityTracking,
   setReferrerUrl,
   trackPageView,
   trackSelfDescribingEvent,
   enableLinkClickTracking,
+  conversion: jobmatixConversion,
 };
-
-const appParams = window.jobmatix.p || {}
-const functionsQueue = window.jobmatix.q || []
-const collectorUrl = 'https://pixel.jobmatix.app'
-const acceptedEnvs = ['production', 'local', 'development', 'demo', 'uat']
-const sourceLinks = ['https://unpkg.com/@jobmatix.com/pixel/script.min.js', 'https://unpkg.com/@jobmatix.com/pixel/jm.min.js', './script.min.js'];
 
 // Get pixel id
 (() => {
@@ -69,7 +75,7 @@ window.jobmatix = (...args) => {
 }
 
 functionsQueue.forEach((args) => {
-  window.jobmatix(...args)
+  jobmatix(...args)
 })
 
 jobmatix('enableActivityTracking', { minimumVisitLength: 10, heartbeatDelay: 10 })
@@ -82,12 +88,7 @@ jobmatix('trackPageView', {
   }],
 })
 
-const acceptedConversionTypes = ['applicant', 'apply_start', 'job_alert', 'resume', 'register']
-const conversionKeys = {
-  type: 'conversion_type',
-}
-
-window.jobmatix.conversion = (params) => {
+function jobmatixConversion(params) {
   try {
     if (!params?.type) {
       throw new Error('Conversion type not found')
@@ -102,7 +103,7 @@ window.jobmatix.conversion = (params) => {
         data[dataKey] = String(params[key])
       }
     })
-    jobmatix('trackSelfDescribingEvent', {
+    trackSelfDescribingEvent({
       event: {
         schema: 'iglu:com.jobmatix/conversion/jsonschema/1-0-0',
         data,

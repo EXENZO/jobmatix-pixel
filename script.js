@@ -15,7 +15,7 @@ function ce(e, t, n) {
   return e.concat(a || Array.prototype.slice.call(t));
 }
 
-function Ur(e) {
+function _r(e) {
   return e && e.__esModule && Object.prototype.hasOwnProperty.call(e, "default") ? e.default : e;
 }
 
@@ -37,7 +37,8 @@ if (kt) {
 var qt = Qn.exports, Wt = []
 for (var pn = 0; pn < 256; ++pn)
   Wt[pn] = (pn + 256).toString(16).substr(1)
-function _r(e, t) {
+
+function Vr(e, t) {
   var n = t || 0, r = Wt
   return [
     r[e[n++]],
@@ -63,13 +64,14 @@ function _r(e, t) {
   ].join("");
 }
 
-var Qt = _r, Vr = qt, Br = Qt, Dt, Bn, Ln = 0, Hn = 0
-function Lr(e, t, n) {
+var Qt = Vr, Br = qt, Lr = Qt, Dt, Bn, Ln = 0, Hn = 0
+
+function Hr(e, t, n) {
   var r = t && n || 0, o = t || [];
   e = e || {};
   var a = e.node || Dt, s = e.clockseq !== void 0 ? e.clockseq : Bn
   if (a == null || s == null) {
-    var f = Vr();
+    var f = Br()
     a == null && (a = Dt = [
       f[0] | 1,
       f[1],
@@ -90,22 +92,23 @@ function Lr(e, t, n) {
   o[r++] = h >>> 8 & 255, o[r++] = h & 255, o[r++] = h >>> 24 & 15 | 16, o[r++] = h >>> 16 & 255, o[r++] = s >>> 8 | 128, o[r++] = s & 255;
   for (var T = 0; T < 6; ++T)
     o[r + T] = a[T];
-  return t || Br(o)
+  return t || Lr(o)
 }
 
-var Hr = Lr, Fr = qt, Mr = Qt
-function zr(e, t, n) {
+var Fr = Hr, Mr = qt, zr = Qt
+
+function Jr(e, t, n) {
   var r = t && n || 0;
   typeof e == "string" && (t = e === "binary" ? new Array(16) : null, e = null), e = e || {};
-  var o = e.random || (e.rng || Fr)();
+  var o = e.random || (e.rng || Mr)()
   if (o[6] = o[6] & 15 | 64, o[8] = o[8] & 63 | 128, t)
     for (var a = 0; a < 16; ++a)
       t[r + a] = o[a];
-  return t || Mr(o);
+  return t || zr(o)
 }
 
-var Jr = zr, Xr = Hr, Yt = Jr, Kn = Yt
-Kn.v1 = Xr
+var Xr = Jr, qr = Fr, Yt = Xr, Kn = Yt
+Kn.v1 = qr
 Kn.v4 = Yt
 var se = Kn
 /*!
@@ -113,8 +116,9 @@ var se = Kn
  * Copyright 2022 Snowplow Analytics Ltd, 2010 Anthon Pang
  * Licensed under BSD-3-Clause
  */
-var qr = "3.13.1";
-function Wr(e) {
+var Wr = '3.13.1'
+
+function Qr(e) {
   if (!e)
     return e;
   var t = 4 - e.length % 4;
@@ -127,17 +131,19 @@ function Wr(e) {
       break;
   }
   var n = e.replace(/-/g, "+").replace(/_/g, "/");
-  return Gr(n)
+  return $r(n)
 }
-function Qr(e) {
+
+function Yr(e) {
   if (!e)
     return e;
-  var t = Yr(e)
+  var t = Gr(e)
   return t.replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
 }
 
 var de = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='
-function Yr(e) {
+
+function Gr(e) {
   var t, n, r, o, a, s, f, u, l = 0, d = 0, w = [];
   if (!e)
     return e;
@@ -148,7 +154,8 @@ function Yr(e) {
   var h = w.join(""), T = e.length % 3;
   return (T ? h.slice(0, T - 3) : h) + "===".slice(T || 3);
 }
-function Gr(e) {
+
+function $r(e) {
   var t = function(C) {
     return decodeURIComponent(C.split('').map(function(m) {
       return '%' + ('00' + m.charCodeAt(0).toString(16)).slice(-2)
@@ -195,15 +202,16 @@ function et() {
     }
   };
 }
-function $r(e) {
+
+function Zr(e) {
   return function(t, n, r) {
     for (var o = function(h, T, C) {
       var m = JSON.stringify(h)
-      e ? t.add(T, Qr(m)) : t.add(C, m)
+      e ? t.add(T, Yr(m)) : t.add(C, m)
     }, a = function() {
       var h = t.getPayload();
       if (e ? h.cx : h.co)
-        return JSON.parse(e ? Wr(h.cx) : h.co);
+        return JSON.parse(e ? Qr(h.cx) : h.co)
     }, s = function(h, T) {
       var C = h || a()
       return C ? C.data = C.data.concat(T.data) : C = T, C
@@ -237,8 +245,9 @@ var hn = 'Snowplow: ', ae;
 (function(e) {
   e[e.none = 0] = "none", e[e.error = 1] = "error", e[e.warn = 2] = "warn", e[e.debug = 3] = "debug", e[e.info = 4] = "info";
 })(ae || (ae = {}));
-var te = Zr()
-function Zr(e) {
+var te = Kr()
+
+function Kr(e) {
   e === void 0 && (e = ae.warn)
   function t(s) {
     ae[s] ? e = s : e = ae.warn
@@ -274,11 +283,12 @@ function Zr(e) {
   }
   return { setLogLevel: t, warn: r, error: n, debug: o, info: a };
 }
-function Kr() {
+
+function eo() {
   var e = [], t = [], n = function(r) {
-    var o = uo(r), a = fo(r), s = [], f = Gn(e, r, a, o);
+    var o = fo(r), a = lo(r), s = [], f = Gn(e, r, a, o)
     s.push.apply(s, f);
-    var u = go(t, r, a, o);
+    var u = mo(t, r, a, o)
     return s.push.apply(s, u), s;
   };
   return {
@@ -315,7 +325,8 @@ function Kr() {
     }
   };
 }
-function eo(e) {
+
+function no(e) {
   return {
     addPluginContexts: function(t) {
       var n = t ? ce([], t, !0) : []
@@ -329,7 +340,8 @@ function eo(e) {
     }
   };
 }
-function no(e) {
+
+function to(e) {
   for (var t, n = [], r = 1; r < arguments.length; r++)
     n[r - 1] = arguments[r];
   return (t = e == null ? void 0 : e.map(function(o) {
@@ -343,12 +355,14 @@ function no(e) {
       return o;
   }).filter(Boolean)) !== null && t !== void 0 ? t : [];
 }
-function to(e) {
+
+function ro(e) {
   var t = new RegExp("^iglu:([a-zA-Z0-9-_.]+)/([a-zA-Z0-9-_]+)/jsonschema/([1-9][0-9]*)-(0|[1-9][0-9]*)-(0|[1-9][0-9]*)$"), n = t.exec(e);
   if (n !== null)
     return n.slice(1, 6);
 }
-function ro(e) {
+
+function oo(e) {
   if (e[0] === "*" || e[1] === "*")
     return !1;
   if (e.slice(2).length > 0) {
@@ -366,7 +380,7 @@ function ro(e) {
 }
 function Zt(e) {
   var t = e.split(".");
-  return t && t.length > 1 ? ro(t) : !1;
+  return t && t.length > 1 ? oo(t) : !1
 }
 function Kt(e) {
   var t = new RegExp("^iglu:((?:(?:[a-zA-Z0-9-_]+|\\*).)+(?:[a-zA-Z0-9-_]+|\\*))/([a-zA-Z0-9-_.]+|\\*)/jsonschema/([1-9][0-9]*|\\*)-(0|[1-9][0-9]*|\\*)-(0|[1-9][0-9]*|\\*)$"), n = t.exec(e);
@@ -381,13 +395,14 @@ function Yn(e) {
   }
   return !1;
 }
-function oo(e) {
+
+function io(e) {
   return Array.isArray(e) && e.every(function(t) {
     return typeof t == "string";
   });
 }
 function Rt(e) {
-  return oo(e) ? e.every(function(t) {
+  return io(e) ? e.every(function(t) {
     return Yn(t);
   }) : typeof e == "string" ? Yn(e) : !1;
 }
@@ -395,7 +410,8 @@ function Ge(e) {
   var t = e;
   return Gt(t) && "schema" in t && "data" in t ? typeof t.schema == "string" && typeof t.data == "object" : !1;
 }
-function io(e) {
+
+function ao(e) {
   var t = e, n = 0;
   if (e != null && typeof e == "object" && !Array.isArray(e)) {
     if (Object.prototype.hasOwnProperty.call(t, "accept"))
@@ -422,12 +438,13 @@ function er(e) {
   return Array.isArray(e) && e.length === 2 ? Array.isArray(e[1]) ? xn(e[0]) && e[1].every(Be) : xn(e[0]) && Be(e[1]) : !1
 }
 function nr(e) {
-  return Array.isArray(e) && e.length === 2 && io(e[0]) ? Array.isArray(e[1]) ? e[1].every(Be) : Be(e[1]) : !1
+  return Array.isArray(e) && e.length === 2 && ao(e[0]) ? Array.isArray(e[1]) ? e[1].every(Be) : Be(e[1]) : !1
 }
 function Nt(e) {
   return er(e) || nr(e)
 }
-function ao(e, t) {
+
+function so(e, t) {
   var n = 0, r = 0, o = e.accept;
   Array.isArray(o) ? e.accept.some(function(s) {
     return wn(s, t)
@@ -440,9 +457,9 @@ function ao(e, t) {
 function wn(e, t) {
   if (!Yn(e))
     return !1;
-  var n = Kt(e), r = to(t)
+  var n = Kt(e), r = ro(t)
   if (n && r) {
-    if (!so(n[0], r[0]))
+    if (!uo(n[0], r[0]))
       return !1;
     for (var o = 1; o < 5; o++)
       if (!tr(n[o], r[o]))
@@ -451,7 +468,8 @@ function wn(e, t) {
   }
   return !1;
 }
-function so(e, t) {
+
+function uo(e, t) {
   var n = t.split("."), r = e.split(".");
   if (n && r) {
     if (n.length !== r.length)
@@ -466,7 +484,8 @@ function so(e, t) {
 function tr(e, t) {
   return e && t && e === "*" || e === t;
 }
-function uo(e) {
+
+function fo(e) {
   for (var t = e.getJson(), n = 0, r = t; n < r.length; n++) {
     var o = r[n];
     if (o.keyIfEncoded === "ue_px" && typeof o.json.data == "object") {
@@ -477,11 +496,13 @@ function uo(e) {
   }
   return "";
 }
-function fo(e) {
+
+function lo(e) {
   var t = e.getPayload().e;
   return typeof t == "string" ? t : "";
 }
-function lo(e, t, n, r) {
+
+function co(e, t, n, r) {
   var o = void 0;
   try {
     var a = {
@@ -500,7 +521,7 @@ function rr(e) {
 }
 function Gn(e, t, n, r) {
   var o, a = rr(e), s = function(u) {
-    var l = co(u, t, n, r);
+    var l = vo(u, t, n, r)
     if (l && l.length !== 0)
       return l;
   }, f = a.map(s);
@@ -508,18 +529,20 @@ function Gn(e, t, n, r) {
     return u != null && u.filter(Boolean);
   }));
 }
-function co(e, t, n, r) {
+
+function vo(e, t, n, r) {
   if (Ge(e))
     return [e];
   if (xn(e)) {
-    var o = lo(e, t, n, r);
+    var o = co(e, t, n, r)
     if (Ge(o))
       return [o];
     if (Array.isArray(o))
       return o;
   }
 }
-function vo(e, t, n, r) {
+
+function go(e, t, n, r) {
   if (er(e)) {
     var o = e[0], a = !1;
     try {
@@ -534,13 +557,14 @@ function vo(e, t, n, r) {
     }
     if (a === !0)
       return Gn(e[1], t, n, r);
-  } else if (nr(e) && ao(e[0], r))
+  } else if (nr(e) && so(e[0], r))
     return Gn(e[1], t, n, r);
   return [];
 }
-function go(e, t, n, r) {
+
+function mo(e, t, n, r) {
   var o, a = rr(e), s = function(u) {
-    var l = vo(u, t, n, r);
+    var l = go(u, t, n, r)
     if (l && l.length !== 0)
       return l;
   }, f = a.map(s);
@@ -548,7 +572,7 @@ function go(e, t, n, r) {
     return u != null && u.filter(Boolean);
   }));
 }
-function mo(e) {
+function po(e) {
   return e == null ? {
     type: 'dtm',
     value: (/* @__PURE__ */ new Date()).getTime(),
@@ -557,10 +581,11 @@ function mo(e) {
     value: e.value,
   } : { type: 'dtm', value: e.value || (/* @__PURE__ */ new Date()).getTime() }
 }
-function po(e) {
+
+function ho(e) {
   e === void 0 && (e = {});
   function t(u, l, d) {
-    var w = eo(l), h = Kr(), T = u, C = {}
+    var w = no(l), h = eo(), T = u, C = {}
     function m(v) {
       if (v && v.length)
         return {
@@ -572,10 +597,9 @@ function po(e) {
       var H = h.getApplicableContexts(v), R = [];
       return P && P.length && R.push.apply(R, P), H && H.length && R.push.apply(R, H), R
     }
-
     function U(v, P, H) {
-      v.withJsonProcessor($r(T)), v.add('eid', se.v4()), v.addDict(C)
-      var R = mo(H)
+      v.withJsonProcessor(Zr(T)), v.add('eid', se.v4()), v.addDict(C)
+      var R = po(H)
       v.add(R.type, R.value.toString());
       var K = E(v, w.addPluginContexts(P)), re = m(K)
       re !== void 0 && v.addJson('cx', 'co', re), l.forEach(function(z) {
@@ -679,30 +703,34 @@ function or(e) {
   };
   return o.add("e", "ue"), o.addJson("ue_px", "ue_pr", a), o;
 }
-function ho(e) {
+
+function wo(e) {
   var t = e.pageUrl, n = e.pageTitle, r = e.referrer, o = et()
   return o.add("e", "pv"), o.add("url", t), o.add("page", n), o.add("refr", r), o;
 }
-function wo(e) {
+function yo(e) {
   var t = e.pageUrl, n = e.pageTitle, r = e.referrer, o = e.minXOffset, a = e.maxXOffset, s = e.minYOffset,
     f = e.maxYOffset, u = et()
-  return u.add("e", "pp"), u.add("url", t), u.add("page", n), u.add("refr", r), o && !isNaN(Number(o)) && u.add("pp_mix", o.toString()), a && !isNaN(Number(a)) && u.add("pp_max", a.toString()), s && !isNaN(Number(s)) && u.add("pp_miy", s.toString()), f && !isNaN(Number(f)) && u.add("pp_may", f.toString()), u;
+  return u.add('e', 'pp'), u.add('url', t), u.add('page', n), u.add('refr', r), o && !isNaN(Number(o)) && u.add('pp_mix', o.toString()), a && !isNaN(Number(a)) && u.add('pp_max', a.toString()), s && !isNaN(Number(s)) && u.add('pp_miy', s.toString()), f && !isNaN(Number(f)) && u.add('pp_may', f.toString()), u
 }
-function yo(e) {
+
+function xo(e) {
   var t = e.targetUrl, n = e.elementId, r = e.elementClasses, o = e.elementTarget, a = e.elementContent, s = {
     schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1",
-    data: xo({ targetUrl: t, elementId: n, elementClasses: r, elementTarget: o, elementContent: a })
+    data: So({ targetUrl: t, elementId: n, elementClasses: r, elementTarget: o, elementContent: a }),
   };
   return or({ event: s })
 }
-function xo(e, t) {
+
+function So(e, t) {
   t === void 0 && (t = {});
   var n = {};
   for (var r in e)
     (t[r] || e[r] !== null && typeof e[r] < "u") && (n[r] = e[r]);
   return n;
 }
-var So = qr, ir = { exports: {} }, ar = { exports: {} };
+
+var To = Wr, ir = { exports: {} }, ar = { exports: {} };
 (function() {
   var e = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", t = {
     // Bit-wise rotation left
@@ -768,7 +796,7 @@ var So = qr, ir = { exports: {} }, ar = { exports: {} };
   };
   ar.exports = t
 })();
-var To = ar.exports, $n = {
+var bo = ar.exports, $n = {
   // UTF-8 encoding
   utf8: {
     // Convert a string to a byte array
@@ -797,7 +825,7 @@ var To = ar.exports, $n = {
   }
 }, jt = $n;
 (function() {
-  var e = To, t = jt.utf8, n = jt.bin, r = function(a) {
+  var e = bo, t = jt.utf8, n = jt.bin, r = function(a) {
     a.constructor == String ? a = t.stringToBytes(a) : typeof Buffer < "u" && typeof Buffer.isBuffer == "function" && Buffer.isBuffer(a) ? a = Array.prototype.slice.call(a, 0) : Array.isArray(a) || (a = a.toString());
     var s = e.bytesToWords(a), f = a.length * 8, u = [], l = 1732584193, d = -271733879, w = -1732584194, h = 271733878, T = -1009589776;
     s[f >> 5] |= 128 << 24 - f % 32, s[(f + 64 >>> 9 << 4) + 15] = f;
@@ -821,14 +849,14 @@ var To = ar.exports, $n = {
   };
   o._blocksize = 16, o._digestsize = 20, ir.exports = o
 })();
-var bo = ir.exports
-const Co = /* @__PURE__ */ Ur(bo)
+var Co = ir.exports
+const Io = /* @__PURE__ */ _r(Co)
 /*!
  * Core functionality for Snowplow Browser trackers v3.13.1 (http://bit.ly/sp-js)
  * Copyright 2022 Snowplow Analytics Ltd, 2010 Anthon Pang
  * Licensed under BSD-3-Clause
  */
-function Io(e) {
+function Po(e) {
   try {
     var t = window.localStorage, n = t.getItem(e + ".expires");
     if (n === null || +n > Date.now())
@@ -848,7 +876,6 @@ function yn(e, t, n) {
     return !1;
   }
 }
-
 function Ut(e) {
   try {
     var t = window.localStorage;
@@ -864,7 +891,8 @@ function _t(e) {
     return;
   }
 }
-function Po(e, t) {
+
+function Ao(e, t) {
   try {
     return window.sessionStorage.setItem(e, t), !0;
   } catch {
@@ -919,7 +947,8 @@ function $e(e, t) {
   var n = new RegExp("^[^#]*[?&]" + e + "=([^&#]*)").exec(t);
   return n ? decodeURIComponent(n[1].replace(/\+/g, " ")) : null;
 }
-function Ao(e, t, n) {
+
+function ko(e, t, n) {
   var r = t + "=" + n, o = e.split("#"), a = o[0].split("?"), s = a.shift(), f = a.join("?");
   if (!f)
     f = r;
@@ -933,12 +962,13 @@ function Ao(e, t, n) {
   }
   return o[0] = s + "?" + f, o.join("#");
 }
-function ko(e, t) {
+
+function Oo(e, t) {
   for (var n = window.location.hostname, r = "_sp_root_domain_test_", o = r + (/* @__PURE__ */ new Date()).getTime(), a = "_test_value_" + (/* @__PURE__ */ new Date()).getTime(), s = n.split("."), f = s.length - 2; f >= 0; f--) {
     var u = s.slice(f).join(".");
     if (Te(o, a, 0, '/', u, e, t), Te(o) === a) {
       Tn(o, u, e, t)
-      for (var l = Oo(r), d = 0; d < l.length; d++)
+      for (var l = Eo(r), d = 0; d < l.length; d++)
         Tn(l[d], u, e, t)
       return u;
     }
@@ -948,7 +978,8 @@ function ko(e, t) {
 function Tn(e, t, n, r) {
   Te(e, '', -1, '/', t, n, r)
 }
-function Oo(e) {
+
+function Eo(e) {
   for (var t = document.cookie.split("; "), n = [], r = 0; r < t.length; r++)
     t[r].substring(0, e.length) === e && n.push(t[r]);
   return n;
@@ -956,20 +987,22 @@ function Oo(e) {
 function Te(e, t, n, r, o, a, s) {
   return arguments.length > 1 ? document.cookie = e + "=" + encodeURIComponent(t ?? "") + (n ? "; Expires=" + new Date(+/* @__PURE__ */ new Date() + n * 1e3).toUTCString() : "") + (r ? "; Path=" + r : "") + (o ? "; Domain=" + o : "") + (a ? "; SameSite=" + a : "") + (s ? "; Secure" : "") : decodeURIComponent((("; " + document.cookie).split("; " + e + "=")[1] || "").split(";")[0]);
 }
-function Eo(e) {
+
+function Do(e) {
   if (e == null || typeof e != "object" || Array.isArray(e))
     return function() {
       return !0;
     };
-  var t = Object.prototype.hasOwnProperty.call(e, "allowlist"), n = No(e);
-  return Ro(e, function(r) {
-    return Do(r, n) === t;
+  var t = Object.prototype.hasOwnProperty.call(e, 'allowlist'), n = jo(e)
+  return No(e, function(r) {
+    return Ro(r, n) === t
   });
 }
 function ur(e) {
   return e.className.match(/\S+/g) || [];
 }
-function Do(e, t) {
+
+function Ro(e, t) {
   for (var n = ur(e), r = 0, o = n; r < o.length; r++) {
     var a = o[r];
     if (t[a])
@@ -977,10 +1010,12 @@ function Do(e, t) {
   }
   return !1;
 }
-function Ro(e, t) {
+
+function No(e, t) {
   return e.hasOwnProperty("filter") && e.filter ? e.filter : t;
 }
-function No(e) {
+
+function jo(e) {
   var t = {}, n = e.allowlist || e.denylist;
   if (n) {
     Array.isArray(n) || (n = [n]);
@@ -990,7 +1025,7 @@ function No(e) {
   return t;
 }
 
-function jo() {
+function Uo() {
   try {
     return !!window.localStorage;
   } catch {
@@ -998,9 +1033,9 @@ function jo() {
   }
 }
 
-function Uo() {
+function _o() {
   var e = "modernizr";
-  if (!jo())
+  if (!Uo())
     return !1;
   try {
     var t = window.localStorage;
@@ -1010,12 +1045,12 @@ function Uo() {
   }
 }
 
-var _o = 'iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0',
-  Vo = 'iglu:com.snowplowanalytics.snowplow/browser_context/jsonschema/1-0-0',
-  Bo = 'iglu:com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2',
-  Lo = 'iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4'
+var Vo = 'iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0',
+  Bo = 'iglu:com.snowplowanalytics.snowplow/browser_context/jsonschema/1-0-0',
+  Lo = 'iglu:com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2',
+  Ho = 'iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4'
 
-function Ho(e, t, n, r, o, a, s, f, u, l, d, w, h, T, C, m) {
+function Fo(e, t, n, r, o, a, s, f, u, l, d, w, h, T, C, m) {
   var E = !1, U, y = []
   r = typeof r == "string" ? r.toLowerCase() : r;
   var M = r === !0 || r === 'beacon' || r === 'true',
@@ -1023,7 +1058,7 @@ function Ho(e, t, n, r, o, a, s, f, u, l, d, w, h, T, C, m) {
     H = r === 'get', R = !!(window.XMLHttpRequest && 'withCredentials' in new XMLHttpRequest()),
     K = !H && R && (r === 'post' || M), re = K ? o : '/i',
     Y = 'snowplowOutQueue_'.concat(e, '_').concat(K ? 'post2' : 'get')
-  if (M && (h = {}), a = n && Uo() && K && a || 1, n)
+  if (M && (h = {}), a = n && _o() && K && a || 1, n)
     try {
       var z = window.localStorage.getItem(Y)
       y = z ? JSON.parse(z) : []
@@ -1167,7 +1202,7 @@ function Ho(e, t, n, r, o, a, s, f, u, l, d, w, h, T, C, m) {
   }
   function pe(p) {
     return JSON.stringify({
-      schema: Lo,
+      schema: Ho,
       data: p,
     });
   }
@@ -1210,28 +1245,30 @@ function Ho(e, t, n, r, o, a, s, f, u, l, d, w, h, T, C, m) {
     function x(A) {
       return A.match('Version/.* Safari/') && !I(A)
     }
-
     function I(A) {
       return A.match("Chrom(e|ium)");
     }
   }
 }
-function Fo(e, t) {
+
+function Mo(e, t) {
   var n = new RegExp("^(?:https?|ftp)(?::/*(?:[^?]+))([?][^#]+)"), r = n.exec(e);
   return r && (r == null ? void 0 : r.length) > 1 ? $e(t, r[1]) : null
 }
 function Ht(e, t, n) {
   var r;
-  return e === 'translate.googleusercontent.com' ? (n === '' && (n = t), t = (r = Fo(t, 'u')) !== null && r !== void 0 ? r : '', e = Sn(t)) : (e === 'cc.bingj.com' || // Bing & Yahoo
+  return e === 'translate.googleusercontent.com' ? (n === '' && (n = t), t = (r = Mo(t, 'u')) !== null && r !== void 0 ? r : '', e = Sn(t)) : (e === 'cc.bingj.com' || // Bing & Yahoo
     e === 'webcache.googleusercontent.com') && (t = document.links[0].href, e = Sn(t)), [e, t, n]
 }
 
-var fr = 0, be = 1, Mo = 2, Ze = 3, nt = 4, lr = 5, ve = 6, Ve = 7, Ce = 8, Ie = 9, ue = 10
-function zo() {
+var fr = 0, be = 1, zo = 2, Ze = 3, nt = 4, lr = 5, ve = 6, Ve = 7, Ce = 8, Ie = 9, ue = 10
+
+function Jo() {
   var e = ["1", "", 0, 0, 0, void 0, "", "", "", void 0, 0];
   return e;
 }
-function Jo(e, t, n, r) {
+
+function Xo(e, t, n, r) {
   var o = /* @__PURE__ */ new Date(), a = Math.round(o.getTime() / 1e3), s;
   e ? (s = e.split("."), s.unshift("0")) : s = [
     // cookies disabled
@@ -1257,7 +1294,7 @@ function Jo(e, t, n, r) {
   }, l = [
     s[fr],
     s[be],
-    f(s[Mo], a),
+    f(s[zo], a),
     f(s[Ze], r),
     f(s[nt], a),
     u(s[lr]),
@@ -1269,7 +1306,8 @@ function Jo(e, t, n, r) {
   ];
   return l;
 }
-function Xo(e, t) {
+
+function qo(e, t) {
   var n;
   return e[be] ? n = e[be] : t ? (n = '', e[be] = n) : (n = se.v4(), e[be] = n), n
 }
@@ -1283,7 +1321,8 @@ function Qe(e, t) {
 function Mn(e) {
   e[nt] = Math.round((/* @__PURE__ */ new Date()).getTime() / 1e3)
 }
-function qo(e, t) {
+
+function Wo(e, t) {
   if (e[ue] === 0) {
     var n = t.build();
     e[Ce] = n.eid
@@ -1291,10 +1330,11 @@ function qo(e, t) {
     e[Ie] = r ? parseInt(r) : void 0
   }
 }
-function Wo(e) {
+function Qo(e) {
   e[ue] += 1
 }
-function Qo(e) {
+
+function Yo(e) {
   return e.shift(), e.join(".");
 }
 function Ft(e, t, n) {
@@ -1313,7 +1353,8 @@ function Ft(e, t, n) {
 function zn(e) {
   return e[ve]
 }
-function Yo(e) {
+
+function Go(e) {
   return e[be]
 }
 function Jn(e) {
@@ -1322,16 +1363,17 @@ function Jn(e) {
 function Zn(e) {
   return e[fr] === '0'
 }
-function Go(e) {
+
+function $o(e) {
   return e[ue]
 }
 
 var Ke = 'x'
 function Xn() {
   return {
-    viewport: qn($o()),
-    documentSize: qn(Zo()),
-    resolution: qn(Ko()),
+    viewport: qn(Zo()),
+    documentSize: qn(Ko()),
+    resolution: qn(ei()),
     colorDepth: screen.colorDepth,
     devicePixelRatio: window.devicePixelRatio,
     cookiesEnabled: window.navigator.cookieEnabled,
@@ -1343,7 +1385,8 @@ function Xn() {
     hardwareConcurrency: window.navigator.hardwareConcurrency
   };
 }
-function $o() {
+
+function Zo() {
   var e, t;
   if ("innerWidth" in window)
     e = window.innerWidth, t = window.innerHeight;
@@ -1353,11 +1396,14 @@ function $o() {
   }
   return e >= 0 && t >= 0 ? e + Ke + t : null
 }
-function Zo() {
-  var e = document.documentElement, t = document.body, n = t ? Math.max(t.offsetHeight, t.scrollHeight) : 0, r = Math.max(e.clientWidth, e.offsetWidth, e.scrollWidth), o = Math.max(e.clientHeight, e.offsetHeight, e.scrollHeight, n);
+function Ko() {
+  var e = document.documentElement, t = document.body, n = t ? Math.max(t.offsetHeight, t.scrollHeight) : 0,
+    r = Math.max(e.clientWidth, e.offsetWidth, e.scrollWidth),
+    o = Math.max(e.clientHeight, e.offsetHeight, e.scrollHeight, n)
   return isNaN(r) || isNaN(o) ? '' : r + Ke + o
 }
-function Ko() {
+
+function ei() {
   return screen.width + Ke + screen.height
 }
 function qn(e) {
@@ -1365,7 +1411,8 @@ function qn(e) {
     return Math.floor(Number(t));
   }).join(Ke);
 }
-function ei(e, t, n, r, o, a) {
+
+function ni(e, t, n, r, o, a) {
   a === void 0 && (a = {});
   var s = [], f = function(d, w, h, T, C, m) {
     var E, U, y, M, v, P, H, R, K, re, Y, z, oe, Ae, ke, ge, Oe, Le, ee, He, me, pe, he, we, Fe, p, b, S
@@ -1384,17 +1431,17 @@ function ei(e, t, n, r, o, a) {
       },
       X = (y = (U = m == null ? void 0 : m.contexts) === null || U === void 0 ? void 0 : U.browser) !== null && y !== void 0 ? y : !1,
       L = (v = (M = m == null ? void 0 : m.contexts) === null || M === void 0 ? void 0 : M.webPage) !== null && v !== void 0 ? v : !0;
-    s.push(Pr()), L && s.push(Cr()), X && s.push(Ir()), s.push.apply(s, (P = m.plugins) !== null && P !== void 0 ? P : [])
-    var D = po({
+    s.push(Ar()), L && s.push(Ir()), X && s.push(Pr()), s.push.apply(s, (P = m.plugins) !== null && P !== void 0 ? P : [])
+    var D = ho({
         base64: m.encodeBase64,
       corePlugins: s,
-      callback: Sr
+        callback: Tr,
       }), Ee = document.characterSet || document.charset, ie = Ht(window.location.hostname, window.location.href, Fn()),
       De = Lt(ie[0]), _ = ie[1], V = ie[2], q, en = (H = m.platform) !== null && H !== void 0 ? H : 'web', Cn = St(T),
-      cr = (R = m.postPath) !== null && R !== void 0 ? R : '/com.snowplowanalytics.snowplow/tp2',
-      dr = (K = m.appId) !== null && K !== void 0 ? K : '', nn, Re = document.title, Me,
-      vr = (re = m.resetActivityTrackingOnPageView) !== null && re !== void 0 ? re : !0, tt, rt,
-      gr = (Y = m.cookieName) !== null && Y !== void 0 ? Y : '_sp_',
+      dr = (R = m.postPath) !== null && R !== void 0 ? R : '/com.snowplowanalytics.snowplow/tp2',
+      vr = (K = m.appId) !== null && K !== void 0 ? K : '', nn, Re = document.title, Me,
+      gr = (re = m.resetActivityTrackingOnPageView) !== null && re !== void 0 ? re : !0, tt, rt,
+      mr = (Y = m.cookieName) !== null && Y !== void 0 ? Y : '_sp_',
       ze = (z = m.cookieDomain) !== null && z !== void 0 ? z : void 0, In = '/',
       tn = (oe = m.cookieSameSite) !== null && oe !== void 0 ? oe : 'None',
       rn = (Ae = m.cookieSecure) !== null && Ae !== void 0 ? Ae : !0,
@@ -1403,22 +1450,22 @@ function ei(e, t, n, r, o, a) {
       at = (ke = m.cookieLifetime) !== null && ke !== void 0 ? ke : 63072e3,
       st = (ge = m.sessionCookieTimeout) !== null && ge !== void 0 ? ge : 1800, Ne = I(m), An = A(m), ne = J(m),
       k = x(m), on, kn = (/* @__PURE__ */ new Date()).getTime(), an, sn, un, fn, ut, ln, G, $ = 1, ye,
-      fe = Ho(d, C, k == 'localStorage' || k == 'cookieAndLocalStorage', m.eventMethod, cr, (Oe = m.bufferSize) !== null && Oe !== void 0 ? Oe : 1, (Le = m.maxPostBytes) !== null && Le !== void 0 ? Le : 4e4, (ee = m.maxGetBytes) !== null && ee !== void 0 ? ee : 0, (He = m.useStm) !== null && He !== void 0 ? He : !0, (me = m.maxLocalStorageQueueSize) !== null && me !== void 0 ? me : 1e3, (pe = m.connectionTimeout) !== null && pe !== void 0 ? pe : 5e3, An, (he = m.customHeaders) !== null && he !== void 0 ? he : {}, (we = m.withCredentials) !== null && we !== void 0 ? we : !0, (Fe = m.retryStatusCodes) !== null && Fe !== void 0 ? Fe : [], ((p = m.dontRetryStatusCodes) !== null && p !== void 0 ? p : []).concat([400, 401, 403, 410, 422])),
+      fe = Fo(d, C, k == 'localStorage' || k == 'cookieAndLocalStorage', m.eventMethod, dr, (Oe = m.bufferSize) !== null && Oe !== void 0 ? Oe : 1, (Le = m.maxPostBytes) !== null && Le !== void 0 ? Le : 4e4, (ee = m.maxGetBytes) !== null && ee !== void 0 ? ee : 0, (He = m.useStm) !== null && He !== void 0 ? He : !0, (me = m.maxLocalStorageQueueSize) !== null && me !== void 0 ? me : 1e3, (pe = m.connectionTimeout) !== null && pe !== void 0 ? pe : 5e3, An, (he = m.customHeaders) !== null && he !== void 0 ? he : {}, (we = m.withCredentials) !== null && we !== void 0 ? we : !0, (Fe = m.retryStatusCodes) !== null && Fe !== void 0 ? Fe : [], ((p = m.dontRetryStatusCodes) !== null && p !== void 0 ? p : []).concat([400, 401, 403, 410, 422])),
       ft = !1, lt = !1, W = {
       enabled: !1,
       installed: !1,
       configurations: {}
-      }, mr = (S = (b = m.contexts) === null || b === void 0 ? void 0 : b.session) !== null && S !== void 0 ? S : !1, cn,
+      }, pr = (S = (b = m.contexts) === null || b === void 0 ? void 0 : b.session) !== null && S !== void 0 ? S : !1, cn,
       dn = m.onSessionUpdateCallback, On = !1;
-    m.hasOwnProperty('discoverRootDomain') && m.discoverRootDomain && (ze = ko(tn, rn))
-    var vn = Xn(), pr = vn.browserLanguage, hr = vn.resolution, wr = vn.colorDepth, yr = vn.cookiesEnabled
-    D.setTrackerVersion(h), D.setTrackerNamespace(w), D.setAppId(dr), D.setPlatform(en), D.addPayloadPair('cookie', yr ? '1' : '0'), D.addPayloadPair('cs', Ee), D.addPayloadPair('lang', pr), D.addPayloadPair('res', hr), D.addPayloadPair('cd', wr), gt(), xt(), m.crossDomainLinker && dt(m.crossDomainLinker)
+    m.hasOwnProperty('discoverRootDomain') && m.discoverRootDomain && (ze = Oo(tn, rn))
+    var vn = Xn(), hr = vn.browserLanguage, wr = vn.resolution, yr = vn.colorDepth, xr = vn.cookiesEnabled
+    D.setTrackerVersion(h), D.setTrackerNamespace(w), D.setAppId(vr), D.setPlatform(en), D.addPayloadPair('cookie', xr ? '1' : '0'), D.addPayloadPair('cs', Ee), D.addPayloadPair('lang', hr), D.addPayloadPair('res', wr), D.addPayloadPair('cd', yr), gt(), xt(), m.crossDomainLinker && dt(m.crossDomainLinker)
     function xe() {
       ie = Ht(window.location.hostname, window.location.href, Fn()), ie[1] !== _ && (V = Fn(_)), De = Lt(ie[0]), _ = ie[1]
     }
     function ct(i) {
       var c = (/* @__PURE__ */ new Date()).getTime(), g = i.currentTarget
-      g != null && g.href && (g.href = Ao(g.href, '_sp', ln + '.' + c))
+      g != null && g.href && (g.href = ko(g.href, '_sp', ln + '.' + c))
     }
     function dt(i) {
       for (var c = 0; c < document.links.length; c++) {
@@ -1434,33 +1481,35 @@ function ei(e, t, n, r, o, a) {
       var c = new RegExp("^([a-z]+):"), g = c.exec(i);
       return g ? g[1] : null;
     }
-    function xr(i, c) {
+
+    function Sr(i, c) {
       var g = vt(c), N
       return g ? c : c.slice(0, 1) === '/' ? vt(i) + '://' + Sn(i) + c : (i = Se(i), (N = i.indexOf('?')) >= 0 && (i = i.slice(0, N)), (N = i.lastIndexOf('/')) !== i.length - 1 && (i = i.slice(0, N + 1)), i + c)
     }
-    function Sr(i) {
+
+    function Tr(i) {
       it || cn || fe.enqueueRequest(i.build(), Cn)
     }
-
     function je(i) {
-      return gr + i + '.' + ut
+      return mr + i + '.' + ut
     }
     function En(i) {
       var c = je(i)
       if (k == "localStorage")
-        return Io(c)
+        return Po(c)
       if (k == "cookie" || k == "cookieAndLocalStorage")
         return Te(c)
     }
     function gt() {
-      xe(), ut = Co((ze || De) + (In || '/')).slice(0, 4)
+      xe(), ut = Io((ze || De) + (In || '/')).slice(0, 4)
     }
     function Je() {
       var i = /* @__PURE__ */ new Date();
       on = i.getTime()
     }
-    function Tr() {
-      br(), Je()
+
+    function br() {
+      Cr(), Je()
     }
     function mt() {
       var i = document.documentElement;
@@ -1472,7 +1521,8 @@ function ei(e, t, n, r, o, a) {
       var g = i[1];
       un = g, fn = g
     }
-    function br() {
+
+    function Cr() {
       var i = mt(), c = i[0]
       c < an ? an = c : c > sn && (sn = c)
       var g = i[1];
@@ -1486,7 +1536,7 @@ function ei(e, t, n, r, o, a) {
       return ht(i, c, st)
     }
     function Rn(i) {
-      var c = je('id'), g = Qo(i)
+      var c = je('id'), g = Yo(i)
       return ht(c, g, at)
     }
     function ht(i, c, g) {
@@ -1502,14 +1552,14 @@ function ei(e, t, n, r, o, a) {
     function xt() {
       if (!(ne && !Ne)) {
         var i = k != 'none' && !!En('ses'), c = Xe()
-        ln = Xo(c, ne), i ? G = zn(c) : G = Qe(c), $ = Jn(c), k != 'none' && (Dn(), Mn(c), Rn(c))
+        ln = qo(c, ne), i ? G = zn(c) : G = Qe(c), $ = Jn(c), k != 'none' && (Dn(), Mn(c), Rn(c))
       }
     }
     function Xe() {
       if (k == "none")
-        return zo();
+        return Jo()
       var i = En('id') || void 0
-      return Jo(i, ln, G, $)
+      return Xo(i, ln, G, $)
     }
     function St(i) {
       return i.indexOf("http") === 0 ? i : (document.location.protocol === "https:" ? "https" : "http") + "://" + i;
@@ -1524,15 +1574,15 @@ function ei(e, t, n, r, o, a) {
       if (k === 'none' || ne || !L)
         return null;
       var i = "_sp_tab_id", c = _t(i);
-      return c || (Po(i, se.v4()), c = _t(i)), c || null
+      return c || (Ao(i, se.v4()), c = _t(i)), c || null
     }
 
-    function Cr() {
+    function Ir() {
       return {
         contexts: function() {
           return [
             {
-              schema: _o,
+              schema: Vo,
               data: {
                 id: Nn(),
               }
@@ -1542,19 +1592,20 @@ function ei(e, t, n, r, o, a) {
       };
     }
 
-    function Ir() {
+    function Pr() {
       return {
         contexts: function() {
           return [
             {
-              schema: Vo,
+              schema: Bo,
               data: Q(Q({}, Xn()), { tabId: bt() }),
             }
           ];
         }
       };
     }
-    function Pr() {
+
+    function Ar() {
       var i = function(g) {
         return ne ? null : g
       }, c = function(g) {
@@ -1562,18 +1613,18 @@ function ei(e, t, n, r, o, a) {
       };
       return {
         beforeTrack: function(g) {
-          var N = En('ses'), O = Xe(), le = Go(O) === 0
+          var N = En('ses'), O = Xe(), le = $o(O) === 0
           if (Pn ? cn = !!Te(Pn) : cn = !1, it || cn) {
             wt()
             return;
           }
           Zn(O) ? (!N && k != 'none' ? G = Qe(O) : G = zn(O), $ = Jn(O)) : (/* @__PURE__ */ new Date()).getTime() - kn > st * 1e3 && ($++, G = Qe(O, {
             memorizedVisitCount: $,
-          })), Mn(O), qo(O, g), Wo(O)
+          })), Mn(O), Wo(O, g), Qo(O)
           var F = Xn(), Ue = F.viewport, qe = F.documentSize
-          g.add('vp', Ue), g.add('ds', qe), g.add('vid', c($)), g.add('sid', c(G)), g.add('duid', i(Yo(O))), g.add('uid', i(ye)), xe(), g.add('refr', Se(q || V)), g.add('url', Se(nn || _))
+          g.add('vp', Ue), g.add('ds', qe), g.add('vid', c($)), g.add('sid', c(G)), g.add('duid', i(Go(O))), g.add('uid', i(ye)), xe(), g.add('refr', Se(q || V)), g.add('url', Se(nn || _))
           var We = Ft(O, k, ne)
-          if (mr && (!ne || Ne) && Ar(g, We), k != 'none') {
+          if (pr && (!ne || Ne) && kr(g, We), k != 'none') {
             Rn(O)
             var Un = Dn();
             (!N || le) && Un && dn && !On && (dn(We), On = !1)
@@ -1582,14 +1633,16 @@ function ei(e, t, n, r, o, a) {
         }
       };
     }
-    function Ar(i, c) {
+
+    function kr(i, c) {
       var g = {
-        schema: Bo,
+        schema: Lo,
         data: c
       };
       i.addContextEntity(g);
     }
-    function kr() {
+
+    function Or() {
       var i = Xe()
       if (Zn(i) ? (k != 'none' ? G = Qe(i) : G = zn(i), $ = Jn(i)) : ($++, G = Qe(i, {
         memorizedVisitCount: $,
@@ -1601,15 +1654,15 @@ function ei(e, t, n, r, o, a) {
       }
       kn = (/* @__PURE__ */ new Date()).getTime()
     }
-
     function jn(i, c) {
       return (i || []).concat(c ? c() : []);
     }
-    function Or(i) {
+
+    function Er(i) {
       var c = i.title, g = i.context, N = i.timestamp, O = i.contextCallback;
       xe(), lt && Tt(), lt = !0, Re = document.title, Me = c
       var le = Bt(Me || Re)
-      D.track(ho({
+      D.track(wo({
         pageUrl: Se(nn || _),
         pageTitle: le,
         referrer: Se(q || V),
@@ -1645,23 +1698,24 @@ function ei(e, t, n, r, o, a) {
           "keyup",
           "touchend",
           "touchstart"
-        ], Nr = ['resize', 'focus', 'blur'], _n = function(jr, _e) {
+        ], jr = ['resize', 'focus', 'blur'], _n = function(Ur, _e) {
           return _e === void 0 && (_e = Je), function(mn) {
             return Z(document, mn, _e)
           };
         };
-        Un.forEach(_n(document)), Nr.forEach(_n(window)), _n(window, Tr)('scroll')
+        Un.forEach(_n(document)), jr.forEach(_n(window)), _n(window, br)('scroll')
       }
-      if (W.enabled && (vr || Ue)) {
+      if (W.enabled && (gr || Ue)) {
         on = F.getTime()
         var It = void 0
         for (It in W.configurations) {
           var Vn = W.configurations[It]
-          Vn && (window.clearInterval(Vn.activityInterval), Er(Vn, g, O))
+          Vn && (window.clearInterval(Vn.activityInterval), Dr(Vn, g, O))
         }
       }
     }
-    function Er(i, c, g) {
+
+    function Dr(i, c, g) {
       var N = function(F, Ue) {
         xe(), F({
           context: Ue,
@@ -1680,7 +1734,6 @@ function ei(e, t, n, r, o, a) {
       };
       i.configMinimumVisitLength != 0 ? i.activityInterval = window.setTimeout(O, i.configMinimumVisitLength) : i.activityInterval = window.setInterval(le, i.configHeartBeatTimer)
     }
-
     function Ct(i) {
       var c = i.minimumVisitLength, g = i.heartbeatDelay, N = i.callback;
       if (Vt(c) && Vt(g))
@@ -1691,9 +1744,10 @@ function ei(e, t, n, r, o, a) {
         };
       te.error('Activity tracking minimumVisitLength & heartbeatDelay must be integers')
     }
-    function Dr(i) {
+
+    function Rr(i) {
       var c = i.context, g = i.minXOffset, N = i.minYOffset, O = i.maxXOffset, le = i.maxYOffset, F = document.title
-      F !== Re && (Re = F, Me = void 0), D.track(wo({
+      F !== Re && (Re = F, Me = void 0), D.track(yo({
         pageUrl: Se(nn || _),
         pageTitle: Bt(Me || Re),
         referrer: Se(q || V),
@@ -1703,13 +1757,14 @@ function ei(e, t, n, r, o, a) {
         maxYOffset: gn(le),
       }), c);
     }
-    var Rr = {
+
+    var Nr = {
       getDomainSessionIndex: function() {
         return $
       },
       getPageViewId: Nn,
       getTabId: bt,
-      newSession: kr,
+      newSession: Or,
       getCookieName: function(i) {
         return je(i)
       },
@@ -1726,7 +1781,7 @@ function ei(e, t, n, r, o, a) {
         q = i
       },
       setCustomUrl: function(i) {
-        xe(), nn = xr(_, i)
+        xe(), nn = Sr(_, i)
       },
       setDocumentTitle: function(i) {
         Re = document.title, Me = i
@@ -1747,7 +1802,7 @@ function ei(e, t, n, r, o, a) {
         dt(i)
       },
       enableActivityTracking: function(i) {
-        W.configurations.pagePing || (W.enabled = !0, W.configurations.pagePing = Ct(Q(Q({}, i), { callback: Dr })))
+        W.configurations.pagePing || (W.enabled = !0, W.configurations.pagePing = Ct(Q(Q({}, i), { callback: Rr })))
       },
       enableActivityTrackingCallback: function(i) {
         W.configurations.callback || (W.enabled = !0, W.configurations.callback = Ct(i))
@@ -1780,7 +1835,7 @@ function ei(e, t, n, r, o, a) {
         i === void 0 && (i = {}), fe.executeQueue(), i.newBufferSize && fe.setBufferSize(i.newBufferSize)
       },
       trackPageView: function(i) {
-        i === void 0 && (i = {}), Or(i);
+        i === void 0 && (i = {}), Er(i)
       },
       preservePageViewId: function() {
         ft = !0
@@ -1794,7 +1849,7 @@ function ei(e, t, n, r, o, a) {
       },
       clearUserData: wt,
     };
-    return Q(Q({}, Rr), { id: d, namespace: w, core: D, sharedState: C })
+    return Q(Q({}, Nr), { id: d, namespace: w, core: D, sharedState: C })
   }, u = f(e, t, n, r, o, a), l = Q(Q({}, u), {
     addPlugin: function(d) {
     var w, h;
@@ -1808,28 +1863,33 @@ function ei(e, t, n, r, o, a) {
 var Ye = {};
 function bn(e, t) {
   try {
-    ti(e ?? ri()).forEach(t);
+    ri(e ?? oi()).forEach(t)
   } catch (n) {
     te.error('Function failed', n)
   }
 }
-function ni(e, t, n, r, o, a) {
-  return Ye.hasOwnProperty(e) ? null : (Ye[e] = ei(e, t, n, r, o, a), Ye[e]);
+
+function ti(e, t, n, r, o, a) {
+  return Ye.hasOwnProperty(e) ? null : (Ye[e] = ni(e, t, n, r, o, a), Ye[e])
 }
-function ti(e) {
-  return oi(e, Ye);
+
+function ri(e) {
+  return ii(e, Ye)
 }
-function ri() {
+
+function oi() {
   return Object.keys(Ye);
 }
-function oi(e, t) {
+
+function ii(e, t) {
   for (var n = [], r = 0, o = e; r < o.length; r++) {
     var a = o[r];
     t.hasOwnProperty(a) ? n.push(t[a]) : te.warn(a + ' not configured')
   }
   return n;
 }
-var ii = (
+
+var ai = (
   /** @class */
   function() {
     function e() {
@@ -1838,8 +1898,9 @@ var ii = (
     return e;
   }()
 );
-function ai() {
-  var e = new ii(), t = document, n = window;
+
+function si() {
+  var e = new ai(), t = document, n = window
   function r() {
     t.visibilityState == "hidden" && e.bufferFlushers.forEach(function(f) {
       f(!1);
@@ -1872,31 +1933,34 @@ function ai() {
  * Copyright 2022 Snowplow Analytics Ltd, 2010 Anthon Pang
  * Licensed under BSD-3-Clause
  */
-function si(e, t) {
+function ui(e, t) {
   bn(t, function(n) {
     n.setReferrerUrl(e);
   });
 }
-function ui(e, t) {
+
+function fi(e, t) {
   bn(t, function(n) {
     n.enableActivityTracking(e);
   });
 }
-function fi(e, t) {
+
+function li(e, t) {
   bn(t, function(n) {
     n.trackPageView(e);
   });
 }
-function li(e, t) {
+
+function cr(e, t) {
   bn(t, function(n) {
     n.core.track(or({ event: e.event }), e.context, e.timestamp)
   });
 }
 
-var Mt = typeof window < 'u' ? ai() : void 0
+var Mt = typeof window < 'u' ? si() : void 0
 function ci(e, t, n) {
   if (n === void 0 && (n = {}), Mt)
-    return ni(e, e, 'js-'.concat(So), t, Mt, n)
+    return ti(e, e, 'js-'.concat(To), t, Mt, n)
 }
 /*!
  * Link Click tracking for Snowplow v3.13.1 (http://bit.ly/sp-js)
@@ -1925,13 +1989,13 @@ function zt(e, t, n) {
   if (l.href != null) {
     var d = l.hostname || Sn(l.href), w = d.toLowerCase(), h = l.href.replace(d, w),
       T = new RegExp('^(javascript|vbscript|jscript|mocha|livescript|ecmascript|mailto):', 'i')
-    T.test(h) || (a = l.id, s = ur(l), f = l.target, u = B[e.id].linkTrackingContent ? l.innerHTML : void 0, h = unescape(h), e.core.track(yo({
+    T.test(h) || (a = l.id, s = ur(l), f = l.target, u = B[e.id].linkTrackingContent ? l.innerHTML : void 0, h = unescape(h), e.core.track(xo({
       targetUrl: h,
       elementId: a,
       elementClasses: s,
       elementTarget: f,
       elementContent: u
-    }), no(n, t)));
+    }), to(n, t)));
   }
 }
 function Wn(e, t) {
@@ -1949,7 +2013,7 @@ function Jt(e, t) {
     linkTrackingContent: a,
     linkTrackingContext: s,
     linkTrackingPseudoClicks: o,
-    linkTrackingFilter: Eo(r)
+    linkTrackingFilter: Do(r),
   };
 }
 function Xt(e) {
@@ -1957,20 +2021,25 @@ function Xt(e) {
   for (o = 0; o < r.length; o++)
     !((n = (t = B[e]).linkTrackingFilter) === null || n === void 0) && n.call(t, r[o]) && !r[o][e] && (gi(e, r[o]), r[o][e] = !0)
 }
-const mi = {
-  enableActivityTracking: ui,
-  setReferrerUrl: si,
-  trackPageView: fi,
-  trackSelfDescribingEvent: li,
-  enableLinkClickTracking: vi
-  }, j = window.jobmatix.p || {}, pi = window.jobmatix.q || [], hi = 'https://pixel.jobmatix.app',
+
+const j = window.jobmatix.p || {}, mi = window.jobmatix.q || [], pi = 'https://pixel.jobmatix.app',
+  hi = ['https://unpkg.com/@jobmatix.com/pixel/script.min.js', 'https://unpkg.com/@jobmatix.com/pixel/jm.min.js', './script.min.js'],
   wi = ['production', 'local', 'development', 'demo', 'uat'],
-  yi = ['https://unpkg.com/@jobmatix.com/pixel/script.min.js', 'https://unpkg.com/@jobmatix.com/pixel/jm.min.js', './script.min.js'];
+  yi = ['applicant', 'apply_start', 'job_alert', 'resume', 'register'], xi = {
+    type: 'conversion_type',
+  }, Si = {
+    enableActivityTracking: fi,
+    setReferrerUrl: ui,
+    trackPageView: li,
+    trackSelfDescribingEvent: cr,
+    enableLinkClickTracking: vi,
+    conversion: Ti,
+  };
 (() => {
   var t
   if (j != null && j.pixel_id)
     return
-  const e = yi.map((n) => document.querySelector(`script[src="${n}"]`)).filter((n) => n)
+  const e = hi.map((n) => document.querySelector(`script[src="${n}"]`)).filter((n) => n)
   j.pixel_id = ((t = e == null ? void 0 : e[0]) == null ? void 0 : t.getAttribute('id')) || ''
 })();
 (() => {
@@ -1979,7 +2048,7 @@ const mi = {
   if (!wi.includes(j == null ? void 0 : j.environment))
     throw new Error('Environment not accepted')
 })();
-ci('jm', hi, {
+ci('jm', pi, {
   'jobmatix-platform-pixel': j.pixel_id,
   plugins: [di()],
   eventMethod: "post",
@@ -1994,14 +2063,14 @@ ci('jm', hi, {
 window.jobmatix = (...e) => {
   const [t, ...n] = e
   try {
-    const r = mi[t]
+    const r = Si[t]
     r(...n)
   } catch {
     console.error(`Function ${t} not found`)
   }
 };
-pi.forEach((e) => {
-  window.jobmatix(...e);
+mi.forEach((e) => {
+  jobmatix(...e)
 });
 jobmatix('enableActivityTracking', { minimumVisitLength: 10, heartbeatDelay: 10 })
 jobmatix('enableLinkClickTracking')
@@ -2012,25 +2081,23 @@ jobmatix('trackPageView', {
     params: j,
   }]
 });
-const xi = ['applicant', 'apply_start', 'job_alert', 'resume', 'register'], Si = {
-  type: 'conversion_type',
-}
-window.jobmatix.conversion = (e) => {
+
+function Ti(e) {
   try {
     if (!(e != null && e.type))
       throw new Error('Conversion type not found')
-    if (!xi.includes(e.type))
+    if (!yi.includes(e.type))
       throw new Error('Conversion type not accepted')
     const t = {}
     Object.keys(e).forEach((n) => {
-      const r = Si[n] || n
+      const r = xi[n] || n
       e[n] && (t[r] = String(e[n]))
-    }), jobmatix('trackSelfDescribingEvent', {
+    }), cr({
       event: {
         schema: 'iglu:com.jobmatix/conversion/jsonschema/1-0-0',
         data: t,
-      },
-    })
+      }
+    });
   } catch(t) {
     console.error(t)
   }

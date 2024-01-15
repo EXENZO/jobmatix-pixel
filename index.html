@@ -13,14 +13,15 @@
   // })(window,document,'script','jobmatix','./script.min.js','[replace-appId]');
 
   // Variant 2:
-  // ((j,o,b,m,a,t,i,x)=>{j[m]||(j[m]=function(){(j[m].q=j[m].q||[]).push(arguments)},
-  //         j[m].q=j[m].q||[],i=o.getElementsByTagName(b)[0],x=o.createElement(b),
-  //         j[m].p = t, x.src = a, x.async = 1, i.parentNode.insertBefore(x, i))
-  // })(window, document, 'script', 'jobmatix', './script.min.js', {
-  //   pixel_id: '1234567890',
-  //   domain_name: 'https://jobmatix.io',
-  //   environment: 'uat',
-  // });
+  ((j, o, b, m, a, t, i, x) => {
+    j[m] || (j[m] = function() {(j[m].q = j[m].q || []).push(arguments)},
+            j[m].q = j[m].q || [], i = o.getElementsByTagName(b)[0], x = o.createElement(b),
+            j[m].p = t, x.src = a, x.async = 1, i.parentNode.insertBefore(x, i))
+  })(window, document, 'script', 'jobmatix', './script.min.js', {
+    pixel_id: '1234567890',
+    domain_name: 'https://jobmatix.io',
+    environment: 'uat',
+  })
 
   // npm run build
   // for minification:
