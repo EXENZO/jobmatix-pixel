@@ -27,6 +27,9 @@ const trackFunctions = {
   conversion: jobmatixConversion,
 };
 
+const trackedId = appParams?.pixel_id ? 'jm' : 'sp';
+const cookieName = `_${trackedId}_`;
+
 // Get pixel id
 (() => {
   if (appParams?.pixel_id) {
@@ -51,12 +54,12 @@ const trackFunctions = {
   }
 })();
 
-newTracker('jm', collectorUrl, {
+newTracker(trackedId, collectorUrl, {
   ['jobmatix-platform-pixel']: appParams.pixel_id,
   plugins: [ LinkClickTrackingPlugin() ],
   eventMethod: 'post',
   platform: 'web',
-  cookieName: '_jm_',
+  cookieName: cookieName,
   cookieSameSite: 'Lax',
   contexts: {
     webPage: !0,
