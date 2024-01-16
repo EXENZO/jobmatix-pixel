@@ -55,7 +55,7 @@ const cookieName = `_${trackedId}_`;
 })();
 
 newTracker(trackedId, collectorUrl, {
-  ['jobmatix-platform-pixel']: appParams.pixel_id,
+  appId: 'jobmatix-platform-pixel',
   plugins: [ LinkClickTrackingPlugin() ],
   eventMethod: 'post',
   platform: 'web',

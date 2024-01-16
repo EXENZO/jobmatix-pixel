@@ -1964,7 +1964,7 @@ const D = window.jobmatix.p || {}, hr = window.jobmatix.q || [], yi = "https://p
     throw new Error("Environment not accepted");
 })();
 mi(wr, yi, {
-  "jobmatix-platform-pixel": D.pixel_id,
+  appId: "jobmatix-platform-pixel",
   plugins: [pi()],
   eventMethod: "post",
   platform: "web",
