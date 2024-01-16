@@ -1,9 +1,9 @@
 {
   "name": "@jobmatix.com/pixel",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && uglifyjs --compress --mangle --output script.min.js -- script.umd.cjs && rm -rf script.umd.cjs && cp script.min.js jm.min.js",
+    "build": "vite build && uglifyjs --compress --mangle --output jm.min.js -- jm.umd.cjs && rm -rf jm.umd.cjs",
     "preview": "vite preview"
   },
   "devDependencies": {
@@ -23,8 +23,8 @@
     "script.min.js",
     "jm.min.js"
   ],
-  "main": "script.min.js",
-  "module": "./script.min.js",
+  "main": "jm.min.js",
+  "module": "./jm.min.js",
   "keywords": [
     "jobmatix",
     "pixel"

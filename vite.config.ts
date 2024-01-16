@@ -9,7 +9,7 @@ export default defineConfig({
       entry: resolve(__dirname, './main.js'),
       name: 'pixel',
       // the proper extensions will be added
-      fileName: 'script',
+      fileName: 'jm',
     },
   },
 })
