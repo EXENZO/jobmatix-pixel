@@ -10,7 +10,6 @@ import { LinkClickTrackingPlugin, enableLinkClickTracking } from '@snowplow/brow
 const appParams = window.jobmatix.p || {}
 const functionsQueue = window.jobmatix.q || []
 const collectorUrl = 'https://pixel.jobmatix.app'
-const sourceLinks = ['https://unpkg.com/@jobmatix.com/pixel/script.min.js', 'https://unpkg.com/@jobmatix.com/pixel/jm.min.js', './script.min.js']
 
 const acceptedEnvs = ['production', 'local', 'development', 'demo', 'uat']
 const acceptedConversionTypes = ['applicant', 'apply_start', 'job_alert', 'resume', 'register']
@@ -27,18 +26,6 @@ const trackFunctions = {
   conversion: jobmatixConversion,
 };
 
-const trackedId = appParams?.pixel_id ? 'jm' : 'sp';
-const cookieName = `_${trackedId}_`;
-
-// Get pixel id
-(() => {
-  if (appParams?.pixel_id) {
-    return
-  }
-  const scripts = sourceLinks.map((src) => document.querySelector(`script[src="${src}"]`)).filter(el => el)
-  appParams.pixel_id = scripts?.[0]?.getAttribute('id') || ''
-})();
-
 // Validate params
 (() => {
   if (!appParams?.environment) {
@@ -53,6 +40,9 @@ const cookieName = `_${trackedId}_`;
     throw new Error('Environment not accepted')
   }
 })();
+
+const trackedId = 'jm';
+const cookieName = `_${trackedId}_`;
 
 newTracker(trackedId, collectorUrl, {
   appId: 'jobmatix-platform-pixel',
