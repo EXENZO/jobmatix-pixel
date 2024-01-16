@@ -2004,7 +2004,7 @@ function Ci(e) {
       e[n] && (t[r] = String(e[n]));
     }), pr({
       event: {
-        schema: "iglu:com.jobmatix/conversion/jsonschema/1-0-0",
+        schema: "iglu:com.jobmatix/jobmatix_platform_conversion/jsonschema/1-0-0",
         data: t
       }
     });
