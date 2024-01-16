@@ -1989,7 +1989,7 @@ An("setReferrerUrl", document.referrer);
 An("trackPageView", {
   context: [{
     schema: "iglu:com.jobmatix/jobmatix_platform_pixel/jsonschema/1-0-0",
-    params: $
+    data: $
   }]
 });
 function Ci(e) {

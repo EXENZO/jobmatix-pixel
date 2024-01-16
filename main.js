@@ -83,7 +83,7 @@ runDefaultAction('setReferrerUrl', document.referrer)
 runDefaultAction('trackPageView', {
   context: [{
     schema: 'iglu:com.jobmatix/jobmatix_platform_pixel/jsonschema/1-0-0',
-    params: appParams,
+    data: appParams,
   }],
 })
 
