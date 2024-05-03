@@ -1940,7 +1940,7 @@ function $t(e) {
   for (o = 0; o < r.length; o++)
     !((n = (t = j[e]).linkTrackingFilter) === null || n === void 0) && n.call(t, r[o]) && !r[o][e] && (wi(e, r[o]), r[o][e] = !0);
 }
-const $ = window.jobmatix.p || {}, hr = window.jobmatix.q || [], yi = "https://pixel.jobmatix.app", xi = ["production", "local", "development", "demo", "uat"], Ti = ["applicant", "apply_start", "job_alert", "resume", "register"], Si = {
+const $ = window.jobmatix.p || {}, hr = window.jobmatix.q || [], yi = "https://jmi.jobmatix.com", xi = ["production", "local", "development", "demo", "uat"], Ti = ["applicant", "apply_start", "job_alert", "resume", "register"], Si = {
   type: "conversion_type"
 }, bi = {
   enableActivityTracking: vi,
