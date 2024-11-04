@@ -2,16 +2,14 @@ var J = function() {
   return J = Object.assign || function(t) {
     for (var n, r = 1, o = arguments.length; r < o; r++) {
       n = arguments[r];
-      for (var a in n)
-        Object.prototype.hasOwnProperty.call(n, a) && (t[a] = n[a]);
+      for (var a in n) Object.prototype.hasOwnProperty.call(n, a) && (t[a] = n[a]);
     }
     return t;
   }, J.apply(this, arguments);
 };
 function re(e, t, n) {
-  if (n || arguments.length === 2)
-    for (var r = 0, o = t.length, a; r < o; r++)
-      (a || !(r in t)) && (a || (a = Array.prototype.slice.call(t, 0, r)), a[r] = t[r]);
+  if (n || arguments.length === 2) for (var r = 0, o = t.length, a; r < o; r++)
+    (a || !(r in t)) && (a || (a = Array.prototype.slice.call(t, 0, r)), a[r] = t[r]);
   return e.concat(a || Array.prototype.slice.call(t));
 }
 function Lr(e) {
