@@ -77,9 +77,6 @@ function runDefaultAction(...as) {
   }
 }
 
-// Commented because too many events are recorded that are not used
-// runDefaultAction('enableActivityTracking', { minimumVisitLength: 10, heartbeatDelay: 10 })
-// runDefaultAction('enableLinkClickTracking')
 runDefaultAction('setReferrerUrl', document.referrer)
 runDefaultAction('trackPageView', {
   context: [{
