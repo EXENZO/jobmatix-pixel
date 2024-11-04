@@ -9,7 +9,7 @@ import { LinkClickTrackingPlugin, enableLinkClickTracking } from '@snowplow/brow
 
 const appParams = window.jobmatix.p || {}
 const functionsQueue = window.jobmatix.q || []
-const collectorUrl = 'https://pixel.jobmatix.app'
+const collectorUrl = 'https://jmi.jobmatix.com'
 
 const acceptedEnvs = ['production', 'local', 'development', 'demo', 'uat']
 const acceptedConversionTypes = ['applicant', 'apply_start', 'job_alert', 'resume', 'register']
